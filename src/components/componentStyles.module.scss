@@ -1,0 +1,88 @@
+.buttonNumber {
+    width: 70px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #E5E4E1;
+    box-shadow: 1px 3px #A69D91;
+    font-weight: bold;    
+    font-size: x-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+.buttonAction {
+    width: 70px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #377f86;
+    border-color: #377f86;
+    box-shadow: 1px 3px #1B5F65;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    font-size: large; 
+    height: 40px;
+}
+.buttonReset {
+    width: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #377f86;
+    border-color: #377f86;
+    box-shadow: 1px 3px #1B5F65;
+    color: white;
+    font-weight: bold;   
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    font-size: large;
+    height: 40px;
+}
+.buttonEqual {
+    width: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #CA5502;
+    border-color: #CA5502;
+    box-shadow: 1px 3px #893901;
+    color: white;
+    font-weight: bold;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    height: 40px;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 390px;
+    background-color: #D1CCCC;
+}
+
+.row {
+    justify-content: center;
+}
+
+.result {
+    width: 390px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+    background-color: #EDEDED;
+    font-weight: bold;  
+    text-align: right;  
+}
+
+.resultText {
+    font-size: x-large;
+}
+
+.rowResult {
+    justify-content: space-between;
+}
