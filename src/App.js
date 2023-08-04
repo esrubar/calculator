@@ -1,34 +1,31 @@
 import { Card, Col, Row, Typography } from "antd";
 import styles from "./components/componentStyles.module.scss";
 import { NumberButton } from "./components/numberButton";
-import { ActionButton } from "./components/actionButton";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useState } from "react";
 const { Text } = Typography;
 
 function App() {
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
   const [operation, setOperation] = useState();
-  const [result, setResult] = useState(0);
+  const [isOperation, setIsOperation] = useState();
+  const [isEqual, setIsEsqual] = useState(false);
 
   const sumar = (a, b) => {
-    setResult(b + a);
     setValue1(b + a);
   };
   const restar = (a, b) => {
-    setResult(b - a);
     setValue1(b - a);
   };
   const multiplicar = (a, b) => {
-    setResult(b * a);
     setValue1(b * a);
   };
   const dividir = (a, b) => {
-    setResult(b / a);
     setValue1(b / a);
   };
 
   const calculate = (a, b) => {
+    setIsEsqual(true);
     if (operation === "+") {
       sumar(a, b);
     } else if (operation === "-") {
@@ -41,16 +38,32 @@ function App() {
   };
 
   const updateValue = (input) => {
-    setValue2(value1);
-    setValue1(input);
+    if (isOperation || isEqual) {
+      setValue2(value1);
+      setValue1(input);
+      setIsEsqual(false);
+    } else {
+      let newValue = value1.toString() + input.toString();
+      setValue1(parseInt(newValue));
+    }
+    setIsOperation(false);
+  };
+  const updateOperation = (input) => {
+    setOperation(input);
+    setIsOperation(true);
+  };
+  const onDeleteLastNumber = (input) => {
+    let num = input.toString();
+    let newNum = num.substr(0, num.length - 1);
+    setValue1(parseInt(newNum));
   };
 
-  useEffect(() => {
-    console.log("resutl " + result);
-  }, [result]);
-  useEffect(() => {
-    console.log("value1 " + value1);
-  }, [value1]);
+  const onReset = () => {
+    setValue1(0);
+    setValue2(0);
+    setIsOperation(undefined);
+    setIsEsqual(undefined);
+  };
 
   return (
     <div>
@@ -84,7 +97,11 @@ function App() {
               />
             </Col>
             <Col>
-              <NumberButton style={styles.buttonAction} num={"DEL"} />
+              <NumberButton
+                style={styles.buttonAction}
+                num={"DEL"}
+                onClick={() => onDeleteLastNumber(value1)}
+              />
             </Col>
           </Row>
           <Row>
@@ -113,7 +130,7 @@ function App() {
               <NumberButton
                 style={styles.buttonNumber}
                 num={"+"}
-                onClick={() => setOperation("+")}
+                onClick={() => updateOperation("+")}
               />
             </Col>
           </Row>
@@ -143,7 +160,7 @@ function App() {
               <NumberButton
                 style={styles.buttonNumber}
                 num={"-"}
-                onClick={() => setOperation("-")}
+                onClick={() => updateOperation("-")}
               />
             </Col>
           </Row>
@@ -162,20 +179,24 @@ function App() {
               <NumberButton
                 style={styles.buttonNumber}
                 num={"/"}
-                onClick={() => setOperation("/")}
+                onClick={() => updateOperation("/")}
               />
             </Col>
             <Col>
               <NumberButton
                 style={styles.buttonNumber}
                 num={"x"}
-                onClick={() => setOperation("*")}
+                onClick={() => updateOperation("*")}
               />
             </Col>
           </Row>
           <Row className={styles.rowResult}>
             <Col>
-              <NumberButton style={styles.buttonReset} num={"RESET"} />
+              <NumberButton
+                style={styles.buttonReset}
+                num={"RESET"}
+                onClick={onReset}
+              />
             </Col>
             <Col>
               <NumberButton
